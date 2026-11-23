@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# Central CodeRabbit configuration for the skillsgateway organization.
+# https://docs.coderabbit.ai/configuration/central-configuration
+#
+# Applies to every repository without its own .coderabbit.yaml. A repository
+# that needs path rules adds a small .coderabbit.yaml with `inheritance: true`
+# and only its own settings: scalars there win, objects merge key by key, lists
+# combine, and path_instructions are matched by path.
+#
+# Advisory only: CodeRabbit never requests changes here, and a bot approval does
+# not count as the one maintainer approval the rulesets require. The rulesets
+# also require every review thread to be resolved, so a CodeRabbit comment blocks
+# merge until it is resolved; reply in the thread when it is wrong.
+language: en-US
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  # PR bodies follow the repository template (attribution, evidence), so the
+  # summary goes in the walkthrough comment, never the description.
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  collapse_walkthrough: true
+  poem: false
+  review_status: true
+  sequence_diagrams: false
+  # Labels are declared in safe-settings (undeclared ones are deleted on sync);
+  # reviewers are the owner.
+  suggested_labels: false
+  suggested_reviewers: false
+  assess_linked_issues: true
+
+  auto_review:
+    enabled: true
+    drafts: false
+    ignore_title_keywords:
+      - "WIP"
+    # Dependency bumps are gated by CI and auto-merged; a review adds noise.
+    # `@coderabbitai review` on one of these PRs still forces a review.
+    ignore_usernames:
+      - "renovate[bot]"
+      - "dependabot[bot]"
+      - "github-actions[bot]"
+
+  path_filters:
+    # Lockfiles are reviewed through the manifests that produce them.
+    - "!**/pnpm-lock.yaml"
+    - "!**/package-lock.json"
+    - "!**/poetry.lock"
+    - "!**/uv.lock"
+
+chat:
+  auto_reply: true
