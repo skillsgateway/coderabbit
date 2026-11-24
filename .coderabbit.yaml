@@ -33,7 +33,8 @@ reviews:
 
   auto_review:
     enabled: true
-    drafts: false
+    # Drafts are reviewed too, so findings land before a PR is marked ready.
+    drafts: true
     ignore_title_keywords:
       - "WIP"
     # Dependency bumps are gated by CI and auto-merged; a review adds noise.
